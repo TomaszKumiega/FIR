@@ -1,8 +1,7 @@
 function [y]=FIR(coeff,x)
 
-M=length(coeff);
-
-n=length(x);
+M=length(coeff)
+n=length(x)
 yt=0;
 y=zeros(1,n);
 
