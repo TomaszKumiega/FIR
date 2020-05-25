@@ -2,22 +2,21 @@ coeff=[-6.875475350454e-006,-8.817704749919e-006,-8.748117386016e-006,-5.7241460
 n=242;
 fs=48000;
 
-[H,w]=freqz(coeff,n);   %funkcja transmitancji - H i dziedzina funkcji transmitancji - w
-w=w*fs/(2*pi);      %zmiana jednostek dziedziny funkcji transmitancji na [Hz]
-
-Habs=abs(H);                %modul funkcji transmitancji / funkcja transmitancji w skali liniowej  
-Hmax=max(Habs);
-HdB=20*log10(Habs/Hmax);    %funkcja transmitancji w skali logarytmicznej
-
 %odpowiedź impulsowa filtru
 k=-(n/2-1):(n/2);
 x = double(kroneckerDelta(sym(k)));
 y = filter2(coeff,x);
 
+[H,w]=freqz(y,n);   %funkcja transmitancji - H i dziedzina funkcji transmitancji - w
+w=w*fs/(2*pi);      %zmiana jednostek dziedziny funkcji transmitancji na [Hz]
+display(H);
+Habs=abs(H);                %modul funkcji transmitancji / funkcja transmitancji w skali liniowej  
+Hmax=max(Habs);
+HdB=20*log10(Habs/Hmax);    %funkcja transmitancji w skali logarytmicznej
 
 %wykresy
 subplot(2,2,1)
-stem(y,'r'); grid on;
+plot(y,'r'); grid on;
 title('Odpowiedz impulsowa')
  
 subplot(2,2,2)
