@@ -33,11 +33,18 @@ int main()
     int sample = 32767;
     int sample_history[no_of_coeffs-1];
 
+	for(int i=0;i<no_of_coeffs-1;i++) sample_history[i]=0;
+
     for(int i=0; i<no_of_coeffs; i++)
     {
-        int output = fir(sample, coeffs_q15, sample_history, no_of_coeffs);
+		int output;
+		if(i==0) output = fir(sample, coeffs_q15, sample_history, no_of_coeffs);
+        else output = fir(0, coeffs_q15, sample_history, no_of_coeffs);
         printf("Coeffs: %d \n", coeffs_q15[i]);
         printf("Output: %d \n", output);
+
+		sample_history[i]=sample;
+		if(i>0) sample_history[i-1] = 0;
     }
 }
 
