@@ -1,36 +1,45 @@
 #include <stdio.h>
 #include "fir.h"
 
-double* fir(double input[],int inputLength);
-
-void main()
+int to_q15(double x)
 {
-	double input[242] = {32767};
-	double *output;
-	output = fir(input,242);
+    if(x < 0.0)
+        return (int)(32768 * x - 0.5);
 
-	for(int i=0; i<242; i++)
-	{
-	    printf("Coeffs: %f \n", coeffs[i]*32767);
-		printf("Output: %f \n", *(output+i));
-	}
-	
+    return (int)(32767 * x + 0.5);
 }
 
-double* fir(double input[],int inputLength)
+int fir(int sample, int *coeffs, int *sample_history, int coeffs_length)
 {
-	double outputValue=0;
-	static double output[242];
+    int output = 0;
 
-	for(int k=0;k<inputLength;k++)
-	{
-		for(int i=0;i<no_of_coeffs;i++)
-		{
-			if(inputLength-k-i>-1) outputValue=outputValue+(input[inputLength-k-i-1]*coeffs[i]);
-		}
-		output[k]=outputValue;
-		outputValue=0;
-	}
+    for(int i=0;i<no_of_coeffs;i++)
+    {
+        if(no_of_coeffs-i>-1) {
+            output = output + (sample_history[no_of_coeffs-i-1]*coeffs[i]);
+        }
+    }
 
-	return output;
+    return output;
 }
+
+int main()
+{
+    int coeffs_q15[no_of_coeffs];
+
+    for(int i=0; i<no_of_coeffs; i++)
+    {
+        coeffs_q15[i] = to_q15(coeffs[i]);
+    }
+
+    int sample = 32767;
+    int sample_history[no_of_coeffs];
+
+    for(int i=0; i<no_of_coeffs; i++)
+    {
+        int output = fir(sample, coeffs_q15, sample_history, no_of_coeffs);
+        printf("Coeffs: %d \n", coeffs_q15[i]);
+        printf("Output: %d \n", output);
+    }
+}
+
