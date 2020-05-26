@@ -11,13 +11,11 @@ int to_q15(double x)
 
 int fir(int sample, int *coeffs, int *sample_history, int coeffs_length)
 {
-    int output = 0;
+    int output = sample*coeffs[0];
 
-    for(int i=0;i<no_of_coeffs;i++)
+    for(int i=1;i<no_of_coeffs;i++)
     {
-        if(no_of_coeffs-i>-1) {
-            output = output + (sample_history[no_of_coeffs-i-1]*coeffs[i]);
-        }
+        output = output + (sample_history[no_of_coeffs-i-1]*coeffs[i]);
     }
 
     return output;
@@ -33,7 +31,7 @@ int main()
     }
 
     int sample = 32767;
-    int sample_history[no_of_coeffs];
+    int sample_history[no_of_coeffs-1];
 
     for(int i=0; i<no_of_coeffs; i++)
     {
