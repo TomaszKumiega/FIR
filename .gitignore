@@ -1,1 +1,5 @@
 fir.exe
+.jxbrowser-data/*
+.metadata/*
+RemoteSystemsTempFiles
+g.code-workspace
