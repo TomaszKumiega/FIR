@@ -20,17 +20,10 @@ int fir(int sample, int *coeffs, int *sample_history, int coeffs_length)
 
     for(int i=0;i<coeffs_length;i++)
     {
-        if(i<=(current_sample_delay)) 
-        {
-            k=i;
-            output += (int)(((*(current_sample-k)*(long)*(coeffs+i))+16384)>>15);   //FIR output y(x)=x(n-i)h(i)
-        }
-        else 
-        {
-            k=i-current_sample_delay-1;
-            output += (int)(((*(current_sample+(coeffs_length-1-current_sample_delay-k))*(long)*(coeffs+i))+16384)>>15);   //FIR output y(x)=x(n-i)h(i)
-        }
-        
+        if(i<=current_sample_delay) current_sample = (sample_history+current_sample_delay-i);
+        else current_sample =sample_history+(coeffs_length-1)-(i-current_sample_delay);
+
+        output += (int)(((*current_sample*(long)*(coeffs+i))+16384)>>15);   //FIR output y(x)=x(n-i)h(i)    
     }
 
     current_sample_delay+=1;
