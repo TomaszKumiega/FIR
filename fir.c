@@ -1,21 +1,26 @@
 #include <stdio.h>
 #include "fir.h"
-int overflow=0;
 
 int to_q15(double x)
 {
-   	return x*32768;
+    return x*32768;
 }
 
 int fir(int sample, int *coeffs, int *sample_history, int coeffs_length)
 {
-    int output = ((long)sample*coeffs[0])>>15;
+    static int current_sample_delay=0;
+    int *current_sample = sample_history+241+current_sample_delay;
+    *current_sample=sample;
 
-    for(int i=1;i<no_of_coeffs;i++)
+    int output =0;
+    
+    for(int i=0;i<coeffs_length;i++)
     {
-        output += (sample_history[no_of_coeffs-i-1]*(long)coeffs[i])>>15;
+        output += (int)(((*(current_sample-i)*(long)*(coeffs+i))+16384)>>15);
     }
 
+    current_sample_delay+=1;
+    
     return output;
 }
 
@@ -28,10 +33,10 @@ int main()
         coeffs_q15[i] = to_q15(coeffs[i]);
     }
 
-    int sample = 32768;					
-    int sample_history[no_of_coeffs-2]; 
+    int sample = 32767;					
+    int sample_history[no_of_coeffs]; 
 
-	for(int i=0;i<no_of_coeffs-2;i++) sample_history[i]=0;
+	for(int i=0;i<no_of_coeffs;i++) sample_history[i]=0;
 
     for(int i=0; i<no_of_coeffs; i++)
     {
@@ -40,11 +45,7 @@ int main()
 		if(i==0) output = fir(sample, coeffs_q15, sample_history, no_of_coeffs);
         else output = fir(0, coeffs_q15, sample_history, no_of_coeffs);
         
-        printf("COEFF: %d \n", coeffs_q15[i]);
-        printf("Wynik: %d \n", output);
-
-        sample_history[no_of_coeffs-2-i]=sample;
-		if(i>0) sample_history[no_of_coeffs-i-1] = 0;
+        printf("Wynik: %d \n", coeffs_q15[i]-output);
     }
 }
 
