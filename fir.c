@@ -8,15 +8,16 @@ int to_q15(double x)
 
 int fir(int sample, int *coeffs, int *sample_history, int coeffs_length)
 {
-    static int current_sample_delay=0;
-    int *current_sample = sample_history+241+current_sample_delay;
-    *current_sample=sample;
+    static int current_sample_delay=0;                                          //position of current sample in sample_history
+
+    int *current_sample = sample_history+coeffs_length-1+current_sample_delay;  //pointer to current sample position 
+    *current_sample=sample;                                                     //add sample to the sample_history array
 
     int output =0;
     
     for(int i=0;i<coeffs_length;i++)
     {
-        output += (int)(((*(current_sample-i)*(long)*(coeffs+i))+16384)>>15);
+        output += (int)(((*(current_sample-i)*(long)*(coeffs+i))+16384)>>15);   //FIR output y(x)=x(n-i)h(i)
     }
 
     current_sample_delay+=1;
