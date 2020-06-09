@@ -122,19 +122,19 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: FIR.out
+all: FIR\ -\ DSPLIB.out
 
 # Tool invocations
-FIR.out: $(OBJS) $(CMD_SRCS) $(LIB_SRCS) $(GEN_CMDS)
+FIR\ -\ DSPLIB.out: $(OBJS) $(CMD_SRCS) $(LIB_SRCS) $(GEN_CMDS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: C5500 Linker'
-	"D:/ti/ccsv5/tools/compiler/c5500_4.4.1/bin/cl55" -v5515 --memory_model=huge -g --define=c5515 --display_error_number --diag_warning=225 --ptrdiff_size=32 --asm_source=mnemonic -z -m"FIR.map" --stack_size=0x200 --heap_size=0x400 -i"D:/ti/ccsv5/tools/compiler/c5500_4.4.1/lib" -i"F:/Downloads/ZPS-Workspace/common5535/Debug" -i"F:/Downloads/ZPS-Workspace/lib" -i"D:/ti/ccsv5/tools/compiler/c5500_4.4.1/include" --reread_libs --display_error_number --warn_sections --xml_link_info="FIR_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "FIR.out" $(ORDERED_OBJS)
+	"D:/ti/ccsv5/tools/compiler/c5500_4.4.1/bin/cl55" -v5515 --memory_model=huge -g --define=c5515 --display_error_number --diag_warning=225 --ptrdiff_size=32 --asm_source=mnemonic -z -m"FIR - DSPLIB.map" --stack_size=0x200 --heap_size=0x400 -i"D:/ti/ccsv5/tools/compiler/c5500_4.4.1/lib" -i"F:/Downloads/ZPS-Workspace/common5535/Debug" -i"F:/Downloads/ZPS-Workspace/lib" -i"D:/ti/ccsv5/tools/compiler/c5500_4.4.1/include" --reread_libs --display_error_number --warn_sections --xml_link_info="FIR - DSPLIB_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "FIR - DSPLIB.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(C5500_EXECUTABLE_OUTPUTS__QUOTED) "FIR.out"
+	-$(RM) $(C5500_EXECUTABLE_OUTPUTS__QUOTED) "FIR - DSPLIB.out"
 	-$(RM) "PLL.pp" "aic3204.pp" "aic3204_init.pp" "main.pp" "stereo.pp" "usbstk5505.pp" "usbstk5505_gpio.pp" "usbstk5505_i2c.pp" "usbstk5505_led.pp" 
 	-$(RM) "PLL.obj" "aic3204.obj" "aic3204_init.obj" "main.obj" "stereo.obj" "usbstk5505.obj" "usbstk5505_gpio.obj" "usbstk5505_i2c.obj" "usbstk5505_led.obj" 
 	-@echo 'Finished clean'

@@ -3,8 +3,6 @@
 #include "Dsplib.h"
 #include "fir.h"
 
-ushort fir(DATA *x, DATA *h, DATA *r, DATA *dbuffer, ushort nx, ushort nh);
-
 int to_q15(double x)
 {
     return x*32768;

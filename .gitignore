@@ -3,3 +3,4 @@ fir.exe
 .metadata/*
 RemoteSystemsTempFiles
 g.code-workspace
+FIR - DSPLIB/Debug/*
