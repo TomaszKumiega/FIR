@@ -48,7 +48,8 @@ int main()
 
 		output = (i==0) ?  fir(sample, coeffs_q15, sample_history, no_of_coeffs) : fir(0, coeffs_q15, sample_history, no_of_coeffs);
      
-        printf("Wynik: %d \n", coeffs_q15[i]-output);
+     
+        printf("Wynik: %d \n", output);
     }
 }
 
