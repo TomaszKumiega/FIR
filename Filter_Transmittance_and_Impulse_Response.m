@@ -3,9 +3,10 @@ n=242;
 fs=48000;
 
 %odpowiedź impulsowa filtru
-k=-(n/2-1):(n/2);
+k=1:n;
+k(1)=0;
 x = double(kroneckerDelta(sym(k)));
-y = filter2(coeff,x);
+y = filter(coeff,1,x);
 
 [H,w]=freqz(y,n);   %funkcja transmitancji - H i dziedzina funkcji transmitancji - w
 w=w*fs/(2*pi);      %zmiana jednostek dziedziny funkcji transmitancji na [Hz]
