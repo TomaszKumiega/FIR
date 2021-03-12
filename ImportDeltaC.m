@@ -21,7 +21,7 @@ opts.ExtraColumnsRule = "ignore";
 opts.EmptyLineRule = "read";
 
 % Import the data
-deltaFilteredC = readtable("C:\Users\tomek\Documents\FIR\deltaFilteredC", opts);
+deltaFilteredC = readtable("<Ścieżka do folderu z plikami>\deltaFilteredC", opts);
 
 
 %% Clear temporary variables

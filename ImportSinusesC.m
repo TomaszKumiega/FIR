@@ -21,7 +21,7 @@ opts.ExtraColumnsRule = "ignore";
 opts.EmptyLineRule = "read";
 
 % Import the data
-sinFilteredC = readtable("C:\Users\tomek\Documents\FIR\sinFilteredC", opts);
+sinFilteredC = readtable("<Ścieżka do folderu z plikami>\sinFilteredC", opts);
 
 
 %% Clear temporary variables

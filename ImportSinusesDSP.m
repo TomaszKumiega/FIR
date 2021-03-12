@@ -21,7 +21,7 @@ opts.ExtraColumnsRule = "ignore";
 opts.EmptyLineRule = "read";
 
 % Import the data
-sinFIlteredDSP = readtable("C:\Users\tomek\Documents\FIR\sinFIlteredDSP", opts);
+sinFIlteredDSP = readtable("<Ścieżka do folderu z plikami>\sinFIlteredDSP", opts);
 
 
 %% Clear temporary variables

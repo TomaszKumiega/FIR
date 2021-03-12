@@ -21,7 +21,7 @@ opts.ExtraColumnsRule = "ignore";
 opts.EmptyLineRule = "read";
 
 % Import the data
-deltaFilteredDSP = readtable("C:\Users\tomek\Documents\FIR\deltaFilteredDSP", opts);
+deltaFilteredDSP = readtable("<Ścieżka do folderu z plikami>\deltaFilteredDSP", opts);
 
 
 %% Clear temporary variables

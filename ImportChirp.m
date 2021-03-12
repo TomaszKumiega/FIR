@@ -21,7 +21,7 @@ opts.ExtraColumnsRule = "ignore";
 opts.EmptyLineRule = "read";
 
 % Import the data
-chirp = readtable("C:\Users\tomek\Documents\FIR\chirp.dat", opts);
+chirp = readtable("<Ścieżka do folderu z plikami>\chirp.dat", opts);
 
 
 %% Clear temporary variables

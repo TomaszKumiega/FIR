@@ -21,7 +21,7 @@ opts.ExtraColumnsRule = "ignore";
 opts.EmptyLineRule = "read";
 
 % Import the data
-output = readtable("C:\Users\tomek\OneDrive\Dokumenty\FIR\output.dat", opts);
+output = readtable("<Ścieżka do folderu z plikami>\output.dat", opts);
 
 
 %% Clear temporary variables

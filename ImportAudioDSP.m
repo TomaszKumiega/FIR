@@ -21,7 +21,7 @@ opts.ExtraColumnsRule = "ignore";
 opts.EmptyLineRule = "read";
 
 % Import the data
-audioFilteredDSP = readtable("C:\Users\tomek\Documents\FIR\audioFilteredDSP", opts);
+audioFilteredDSP = readtable("<Ścieżka do folderu z plikami>\audioFilteredDSP", opts);
 
 
 %% Clear temporary variables
