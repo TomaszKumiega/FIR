@@ -1,5 +1,5 @@
-function [y]=to_q15(coeffs)
+function [y]=to_q15(values)
 
-y=coeffs.*32768;
+y=values.*32768;
 y=round(y);
 end
