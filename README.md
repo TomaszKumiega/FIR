@@ -1,6 +1,6 @@
 # FIR
 
-We wszystkich plikach zaczynających się od "Import" trzeba podmienić <Ścieżka do folderu z plikami> na ścieżkę folderu FIR gdzie znajdują się wszystkie pliki.\
+We wszystkich plikach zaczynających się od "Import" trzeba podmienić <Ścieżka do folderu z plikami> na ścieżkę folderu ze wszystkimi plikami.\
 W pliku coeff.m trzeba zamienić zwracane wartości na podane współczynniki filtru
 
 ## FIR-DSPLIB
